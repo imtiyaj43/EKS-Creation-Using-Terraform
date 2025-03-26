@@ -30,27 +30,27 @@ resource "aws_internet_gateway" "terraform_igw" {
   }
 }
 
-resource "aws_route_table" "terrafrom_route_table" {
-  vpc_id = aws_vpc.terrafrom_vpc.id
+resource "aws_route_table" "terraform_route_table" {
+  vpc_id = aws_vpc.terraform_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.terrafrom_igw.id
+    gateway_id = aws_internet_gateway.terraform_igw.id
   }
 
   tags = {
-    Name = "terrafrom-route-table"
+    Name = "terraform-route-table"
   }
 }
 
 resource "aws_route_table_association" "a" {
   count          = 2
-  subnet_id      = aws_subnet.terrafrom_subnet[count.index].id
-  route_table_id = aws_route_table.terrafrom_route_table.id
+  subnet_id      = aws_subnet.terraform_subnet[count.index].id
+  route_table_id = aws_route_table.terraform_route_table.id
 }
 
-resource "aws_security_group" "terrafrom_cluster_sg" {
-  vpc_id = aws_vpc.terrafrom_vpc.id
+resource "aws_security_group" "terraform_cluster_sg" {
+  vpc_id = aws_vpc.terraform_vpc.id
 
   egress {
     from_port   = 0
@@ -60,12 +60,12 @@ resource "aws_security_group" "terrafrom_cluster_sg" {
   }
 
   tags = {
-    Name = "terrafrom-cluster-sg"
+    Name = "terraform-cluster-sg"
   }
 }
 
-resource "aws_security_group" "terrafrom_node_sg" {
-  vpc_id = aws_vpc.terrafrom_vpc.id
+resource "aws_security_group" "terraform_node_sg" {
+  vpc_id = aws_vpc.terraform_vpc.id
 
   ingress {
     from_port   = 0
@@ -116,8 +116,8 @@ resource "aws_eks_node_group" "terraform" {
   }
 }
 
-resource "aws_iam_role" "terrafrom_cluster_role" {
-  name = "terrafrom-cluster-role"
+resource "aws_iam_role" "terraform_cluster_role" {
+  name = "terraform-cluster-role"
 
   assume_role_policy = <<EOF
 {

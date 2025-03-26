@@ -23,11 +23,13 @@ aws configure
    Ensure you enter the details correctly to allow AWS CLI to interact with your AWS resources.
 
 
-## Step 2 : Install Kubectl latest version using below commands
+## Step 2 : Install Kubectl latest version
 ```
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin
 kubectl version --short --client
 ```
-### After succefully installting all the above packages execute terraform commands.
+## Step 3 : Execute Terraform Commands
+
+### After successfully installing all the required tools (AWS CLI, kubectl, and Terraform), you can now proceed with executing your Terraform commands to provision and manage your AWS resources.
